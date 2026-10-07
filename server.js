@@ -17,17 +17,16 @@ connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://food-delivery-app-two-sigma.vercel.app/",
-    ],
-    credentials: true,
-  }),
-);
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://food-delivery-app-two-sigma.vercel.app",
+  ],
+  credentials: true,
+};
 
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.use("/", express.static(path.join(__dirname, "public")));
